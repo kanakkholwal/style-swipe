@@ -9,7 +9,8 @@ from selenium import webdriver
 # Search term
 query = "t-shirts"
 # gender => ("men","women")
-gender="men" 
+gender="women" 
+total_pages = 20
 
 # File to save the data
 csv_file = f'myntra_products_{gender}.csv'
@@ -22,13 +23,14 @@ def search_url(query, page_number):
 # Path to your ChromeDriver
 driver = webdriver.Chrome()
 
+print(f"Scraping data for Gender : {gender} and Query : '{query}'...")
 
 
 # Create CSV file and write headers if the file is empty or does not exist
 if not os.path.isfile(csv_file) or os.path.getsize(csv_file) == 0:
     with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        writer.writerow(['Description', 'Product URL', 'Image', 'Specifications'])
+        writer.writerow(['Description', 'Product URL', 'Image','Gender', 'Specifications'])
 
 def extract_image_url(style):
     # Use regex to extract the URL from the background-image style
@@ -96,7 +98,7 @@ def get_data(index):
             ])
         print(f"Page {index} data saved to {csv_file}")
 
-for i in range(1, 20):
+for i in range(1, total_pages):
     get_data(i)
 
 # Close the driver after scraping
