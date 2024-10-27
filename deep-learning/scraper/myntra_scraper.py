@@ -38,7 +38,7 @@ def extract_image_url(style):
     match = re.search(r'url\(["\']?(.*?)["\']?\)', style)
     return match.group(1) if match else None
 
-def scrape_item(soup):
+def scrape_item(soup,item_type,index):
     
     # Get descriptions
     description_elements = soup.find_all('h4', class_='product-product')
@@ -89,32 +89,35 @@ def scrape_item(soup):
 
         specifications.append(_specifications)
 
-    # Write each scraped product to the CSV file
-    with open(OUTPUT_FILE, mode='a', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        print(f"Writing {len(images)} entries to {OUTPUT_FILE}, {len(images) == len(product_urls)}")
-        for i in range(len(product_urls)):
-            if images[i] is not None:
-                writer.writerow([
-                    descriptions[i] or "N/A",
-                    images[i] or "N/A",
-                    gender,
-                    value[i],
-                    specifications[i] or "N/A"
-                ])
-            else:
-                print(f"Skipping entry with missing image URL: {descriptions[i]}")
-
-    # update progress
+    
     progress = get_current_progress()
-    progress['no_of_scraped_items'] += len(images)
-    json_object = json.dumps(progress, indent=4)
-    try:
-        # Writing to PROGRESS_FILE.json
-        with open(PROGRESS_FILE, "w") as outfile:
-            outfile.write(json_object)
-    except Exception as e:
-        print(f"Error occurred while updating progress in 'scrape_item': {e}")
+    if progress['no_of_scraped_items'] < ITEMS_TO_SCRAPE:
+        # Write each scraped product to the CSV file
+        with open(OUTPUT_FILE, mode='a', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            print(f"Writing {len(images)} entries to {OUTPUT_FILE}, {len(images) == len(product_urls)}")
+            # update progress
+            
+            for i in range(len(product_urls)):
+                        writer.writerow([
+                            descriptions[i] or "N/A",
+                            images[i],
+                            key,
+                            item_type,
+                            specifications[i] or {}
+                        ])
+
+        # update progress
+        progress = get_current_progress()
+        progress['no_of_scraped_items'] += len(images)
+        progress['page_number']+=1
+        json_object = json.dumps(progress, indent=4)
+        try:
+            # Writing to PROGRESS_FILE.json
+            with open(PROGRESS_FILE, "w") as outfile:
+                outfile.write(json_object)
+        except Exception as e:
+            print(f"Error occurred while updating progress in 'scrape_item': {e}")
 
         
 
@@ -152,27 +155,33 @@ for key, value in ITEMS.items():
     progress = get_current_progress()
     if progress:
         print(f"Progress: {get_current_progress()}")
-        gender = progress['gender']
         no_of_scraped_items = progress['no_of_scraped_items']
         item_type_index = progress['item_type_index']
             
         for i in range(item_type_index,len(value)):
             if no_of_scraped_items < ITEMS_TO_SCRAPE:
                 query = value[i]
-                for i in range(1, 20):
-                        driver.get(get_search_url(gender,query,i))
-                        soup = BeautifulSoup(driver.page_source, 'html.parser')
-                        print(f"Scraping {get_search_url(gender,query,i)}")
-                        scrape_item(soup)
-                        print(f"Progress: {get_current_progress()}")
+                for index in range(progress["page_number"], 20):
+                        progress = get_current_progress()
+                        if progress['no_of_scraped_items'] < ITEMS_TO_SCRAPE:
+                            driver.get(get_search_url(key,query,index))
+                            soup = BeautifulSoup(driver.page_source, 'html.parser')
+                            print(f"Scraping {get_search_url(key,query,index)}")
+                            scrape_item(soup,item_type=query,index=index)
+                            print(f"Progress: {get_current_progress()}")
+                        else:
+                            break
 
             progress = get_current_progress()
+            
             if progress['item_type_index'] == len(value)-1:
-                    progress["item_type_index"] =0
+                    progress["item_type_index"] = 0
             else:
                     progress["item_type_index"] += 1
             if progress['no_of_scraped_items'] >= ITEMS_TO_SCRAPE:
                     progress["no_of_scraped_items"] = 0
+                    
+            progress["page_number"] = 1
             progress["gender"] = key
             json_object = json.dumps(progress, indent=4)
             try:

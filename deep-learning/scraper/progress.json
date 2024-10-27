@@ -1,5 +1,6 @@
 {
     "gender": "men",
-    "item_type_index": 0,
-    "no_of_scraped_items": 0
+    "item_type_index": 4,
+    "no_of_scraped_items": 450,
+    "page_number": 10
 }
