@@ -3,17 +3,18 @@ import pandas as pd
 OUTPUT_FILE = "myntra_products.csv"
 df = pd.read_csv(OUTPUT_FILE)
 
-# Basic stats
-total_entries = len(df)
-missing_values = df.isna().sum()  # Count of None/NaN values in each column
-non_missing_values = df.notna().sum()  # Count of non-None/NaN values in each column
-column_stats = df.describe(include='all')  # Summary statistics for all columns
+# Remove rows with any null values
+df_cleaned = df.dropna()
 
-# Display the stats
-print(f"Total entries in the dataset: {total_entries}")
-print("\nNumber of missing values per label:")
-print(missing_values)
-print("\nNumber of non-missing values per label:")
-print(non_missing_values)
-print("\nColumn statistics:")
-print(column_stats)
+# Display statistics of the cleaned DataFrame
+print("Statistical Summary of the Cleaned DataFrame:")
+print(df_cleaned.describe(include='all'))
+
+# Additional statistics
+print("\nAdditional Information after Cleaning:")
+print(f"Number of unique values in each column:\n{df_cleaned.nunique()}")
+print(f"\nMissing values in each column:\n{df_cleaned.isnull().sum()}")
+print(f"\nData types of each column:\n{df_cleaned.dtypes}")
+
+# Save the cleaned DataFrame to a new CSV file
+# df_cleaned.to_csv(OUTPUT_FILE, index=False)

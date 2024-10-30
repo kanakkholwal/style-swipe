@@ -200,9 +200,10 @@ for key, value in ITEMS.items():
             progress = get_current_progress()
             
             if progress['item_type_index'] == len(value)-1:
-                    progress["item_type_index"] = 0
+                progress["item_type_index"] = 0
             else:
-                    progress["item_type_index"] += 1
+                progress["item_type_index"] += 1
+                
             if progress['no_of_scraped_items'] >= ITEMS_TO_SCRAPE:
                     progress["no_of_scraped_items"] = 0
                     
