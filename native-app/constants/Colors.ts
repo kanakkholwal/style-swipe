@@ -24,3 +24,14 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+
+export const MainPalette = {
+  accent: '#FFD700',
+  primary: 'hsl(264,38%,50%)',
+  secondary: 'hsl(204,96%,27%)',
+  tertiary: 'hsl(0,0%,100%)',
+  background: '#000',
+  cardBg: '#fff',
+  cardBorder: 'rgba(100,116,139,.1)',
+}

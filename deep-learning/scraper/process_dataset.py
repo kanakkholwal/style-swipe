@@ -5,6 +5,9 @@ import pandas as pd
 # Load the dataset
 df = pd.read_csv('myntra_products.csv')
 df.drop_duplicates(subset=None, inplace=True)
+# shuffle the dataset
+df = df.sample(frac=1).reset_index(drop=True)
+
 
 # Parse the 'specifications' column
 def parse_specifications(spec):
