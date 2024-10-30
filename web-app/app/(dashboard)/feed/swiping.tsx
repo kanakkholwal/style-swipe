@@ -1,7 +1,6 @@
 "use client";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import Image from 'next/image';
 import TinderCard from 'react-tinder-card';
+import ProductCard from "./product-card";
 
 const Component = () => {
     const swiped = (direction: string, nameToDelete: any) => {
@@ -13,7 +12,7 @@ const Component = () => {
     };
 
     return (
-        <div className="w-full max-w-lg p-5 h-[80vh] overflow-hidden flex justify-center items-center bg-gray-50">
+        <>
             {DATA.map((card, index) => {
                 return (
                     <TinderCard
@@ -26,26 +25,11 @@ const Component = () => {
                         onCardLeftScreen={() => outOfFrame(card)}
                         key={index}
                     >
-                        <Card className="rounded-lg shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105">
-                            <CardHeader className="p-4">
-                                <CardTitle className="text-lg font-semibold">{card.description}</CardTitle>
-                                <CardDescription className="text-sm text-gray-600">{card.gender.toUpperCase()} | {card.item_type.toUpperCase()}</CardDescription>
-                            </CardHeader>
-                            <CardContent className="relative">
-                                <Image 
-                                    src={card.image_url} 
-                                    width={300} 
-                                    height={480} 
-                                    alt={card.description} 
-                                    className="w-full h-auto max-h-80 rounded-lg object-cover" 
-                                    draggable={false} 
-                                />
-                            </CardContent>
-                        </Card>
+                        <ProductCard product={card}/>
                     </TinderCard>
                 );
             })}
-        </div>
+        </>
     );
 };
 
@@ -174,3 +158,6 @@ const DATA = [
         "specifications": "{'fabric': 'Cotton', 'fit': 'Oversized', 'length': 'Regular', 'main_trend': 'Graphic Print Others', 'neck': 'Round Neck', 'occasion': 'Casual'}"
     }
 ]
+
+
+export type ProductType = typeof DATA[number];
