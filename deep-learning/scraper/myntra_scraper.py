@@ -57,6 +57,7 @@ def scrape_item(soup,item_type,index,gender):
 
     # Get product URLs
     li_elements = soup.find_all('li', class_="product-base")
+    
     product_urls = [
         'http://myntra.com/' + li.find('a', {'data-refreshpage': 'true', 'target': '_blank'})['href']
         if li.find('a', {'data-refreshpage': 'true', 'target': '_blank'}) else None
