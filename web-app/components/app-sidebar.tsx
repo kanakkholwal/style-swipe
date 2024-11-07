@@ -1,14 +1,11 @@
 "use client"
 
 import {
-  BookOpen,
-  Bot,
   Frame,
   GalleryVerticalEnd,
   Map,
   PieChart,
-  Settings2,
-  SquareTerminal
+  Settings2
 } from "lucide-react"
 import * as React from "react"
 

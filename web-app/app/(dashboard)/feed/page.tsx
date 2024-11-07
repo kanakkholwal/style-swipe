@@ -1,10 +1,21 @@
-import Swipers from "./swiping";
+import { DATA } from "@/db/connect";
+import AsideSection from "./aside";
+import FiltersSection from "./filters";
+import SwipeSection from "./swiping";
 
-export default function FeedPage() {
+const databaseFetch = async () => {
+    // 3 second promise
 
-    return <>
-        <div className="w-full max-w-md relative overflow-hidden border max-h-screen h-full flex justify-center items-center bg-gray-50">
-            <Swipers />
-        </div>
-    </>
+    return Promise.resolve(DATA)
+}
+export default async function FeedPage() {
+    const data = await databaseFetch()
+
+
+    return <div className="flex gap-4 h-full w-full">
+        <SwipeSection data={data} />
+        <AsideSection>
+            <FiltersSection />
+        </AsideSection>
+    </div>
 }

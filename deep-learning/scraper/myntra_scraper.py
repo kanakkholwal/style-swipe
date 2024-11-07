@@ -11,11 +11,11 @@ from selenium import webdriver
 ITEMS_TO_SCRAPE = 1000
 
 ITEMS = {
-    "men": [
-        "t-shirt", "shirts", "jeans", "trousers", "shorts", "jackets", "sweatshirts",
-        "suits", "blazers", "innerwear", "track pants", "hoodies", "ethnic wear",
-        "kurta", "vests", "socks", "sweaters", "coats", "cargos", "swimwear", "nightwear"
-    ],
+    # "men": [
+    #     "t-shirt", "shirts", "jeans", "trousers", "shorts", "jackets", "sweatshirts",
+    #     "suits", "blazers", "innerwear", "track pants", "hoodies", "ethnic wear",
+    #     "kurta", "vests", "socks", "sweaters", "coats", "cargos", "swimwear", "nightwear"
+    # ],
     "women": [
         "t-shirt", "tops", "dresses", "jeans", "trousers", "shorts", "skirts", "jackets",
         "sweatshirts", "suits", "blazers", "innerwear", "leggings", "kurti", "ethnic wear",

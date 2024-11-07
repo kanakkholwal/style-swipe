@@ -17,4 +17,4 @@ print(f"\nMissing values in each column:\n{df_cleaned.isnull().sum()}")
 print(f"\nData types of each column:\n{df_cleaned.dtypes}")
 
 # Save the cleaned DataFrame to a new CSV file
-# df_cleaned.to_csv(OUTPUT_FILE, index=False)
+df_cleaned.to_csv(OUTPUT_FILE, index=False)
