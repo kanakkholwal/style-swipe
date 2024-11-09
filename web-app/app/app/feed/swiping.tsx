@@ -10,8 +10,21 @@ type feedQueueType = {
     product_id: string
 }
 
+
+
+function addToCart(product: ProductType) {
+    console.log("Added to cart: ", product);
+}
+function likeProduct(product: ProductType) {
+    console.log("Added to cart: ", product);
+}
+function dislikeProduct(product: ProductType) {
+    console.log("Added to cart: ", product);
+}
+
 export default function SwipeSection({ data }: { data: ProductType[] }) {
     const [queue, setQueue] = useState<feedQueueType[]>([])
+
 
 
     const swiped = async (direction: string, product: ProductType) => {
@@ -26,8 +39,21 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
     };
 
 
-    const outOfFrame = async (name: any) => {
-        console.log(name, ' left the screen!');
+    const outOfFrame = async (direction:string,product: ProductType) => {
+        console.log(direction, ' left the screen!');
+        switch (direction) {
+            case "left":
+                dislikeProduct(product)
+                break;
+            case "right":
+                likeProduct(product)
+                break;
+            case "up":
+                addToCart(product)
+                break;
+            default:
+                break;
+        }
 
     };
     const handle_success_swipe = (direction: string, product: ProductType) => {
@@ -37,11 +63,10 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
 
     }
 
-    return (
+    return (<>
+    
+
         <div className="w-full max-w-xl relative overflow-hidden max-h-screen h-full flex justify-center items-center">
-            <div>
-                
-            </div>
             {data.map((product, index) => {
                 return (
                     <TinderCard
@@ -51,7 +76,7 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
                         preventSwipe={['down']}
                         flickOnSwipe={true}
                         swipeRequirementType='position'
-                        onCardLeftScreen={() => outOfFrame(product)}
+                        onCardLeftScreen={(direction) => outOfFrame(direction,product)}
                         onSwipeRequirementFulfilled={(dir) => handle_success_swipe(dir, product)}
                         onSwipeRequirementUnfulfilled={handle_failed_swipe}
                         key={index}
@@ -61,7 +86,7 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
                 );
             })}
         </div>
-    );
+    </>);
 };
 
 

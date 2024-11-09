@@ -5,17 +5,35 @@ import {
     CardFooter,
     CardTitle
 } from "@/components/ui/card";
+// import useLocalStorage from "@/hooks/use-local-storage";
 import { slugify } from "@/lib/string";
 import { ProductType } from "@/types/product";
-import { ShoppingCart } from 'lucide-react';
+import {
+    // ShoppingCart,
+    Bookmark
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from "next/link";
+import { useState } from "react";
 
 type ProductCardProps = {
     product: ProductType;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+    // const [saved_products, setSavedProducts] = useLocalStorage<string[]>("saved_products", [])
+    const [saved_products, setSavedProducts] = useState<string[]>([])
+
+    const product_id = slugify(product.description)
+
+    const toggleSave = () => {
+        if (saved_products.includes(product_id)) {
+            setSavedProducts(saved_products.filter((item) => item !== product_id))
+        } else {
+            setSavedProducts([...saved_products, product_id])
+        }
+
+    }
 
     return <div className="rounded-xl shadow-lg transition-transform duration-300 ease-in-out transform hover:scale-105 p-0 w-full max-w-md relative bg-white">
         <div className="p-0">
@@ -32,15 +50,14 @@ export default function ProductCard({ product }: ProductCardProps) {
             <CardTitle className="text-lg font-semibold">{product.description}</CardTitle>
             <CardDescription className="text-sm text-gray-600">{product.gender.toUpperCase()} | {product.item_type.toUpperCase()}</CardDescription>
             <div className="absolute left-auto right-12 -top-1/3">
-                <Button size="icon_lg" variant="gradient_blue">
-                    <ShoppingCart/>
+                <Button size="icon_lg" rounded="full" className="bg-green-600 hover:bg-green-700 shadow-lg" onClick={() => toggleSave()}>
+                    {saved_products.includes(product_id) ? <Bookmark className="fill-white" /> : <Bookmark className="text-white" />}
                 </Button>
-
             </div>
         </div>
         <CardFooter>
             <Button className="w-full" asChild>
-                <Link href={"/products/" + slugify(product.description)}>
+                <Link href={"/products/" + product_id}>
                     View Details
                 </Link>
             </Button>
