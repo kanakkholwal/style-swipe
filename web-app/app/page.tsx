@@ -7,6 +7,7 @@ import {
   CarouselItem
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -21,8 +22,11 @@ export default function Home() {
           <p className="text-center text-xl text-gray-600 dark:text-gray-300">
             Discover your next favorite outfit with {process.env.NEXT_PUBLIC_APP_NAME}. Swipe through thousands of styles, curated just for you.
           </p>
-          <Button rounded="full" size="lg" className="mt-8" transition="damped">
+          <Button rounded="full" size="lg" className="mt-8" transition="damped" asChild>\
+            <Link href="/app">
+
             Start Swiping
+          </Link>
           </Button>
         </section>
 

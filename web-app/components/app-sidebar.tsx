@@ -61,17 +61,17 @@ const data = {
   routes: [
     {
       name: "Explore Feed",
-      url: "/feed",
+      url: "app/feed",
       icon: Frame,
     },
     {
       name: "Ask your outfit",
-      url: "/ask-outfit",
+      url: "app/ask-outfit",
       icon: PieChart,
     },
     {
       name: "Search for outfits",
-      url: "/search",
+      url: "app/search",
       icon: Map,
     },
   ],
