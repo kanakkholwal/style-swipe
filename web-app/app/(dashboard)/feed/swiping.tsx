@@ -5,7 +5,7 @@ import {ProductType} from "@/types/product";
 import { useState } from 'react';
 import { slugify } from '@/lib/string';
 
-interface feedQueueType {
+type feedQueueType= {
     action:"liked" | "disliked",
     product_id:string
 }
