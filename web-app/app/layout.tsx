@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Toaster } from 'react-hot-toast';
 
 const font = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
@@ -28,6 +29,7 @@ export default function RootLayout({
         className={`${font.className} antialiased`}
       >
         {children}
+        <Toaster />
       </body>
     </html>
   );
