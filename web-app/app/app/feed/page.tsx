@@ -16,9 +16,9 @@ export default async function FeedPage() {
     return <div className="flex gap-4 h-full w-full">
         <SwipeSection data={data} />
         <Suspense>
-        <AsideSection>
-            <FiltersSection />
-        </AsideSection>
+            <AsideSection>
+                <FiltersSection />
+            </AsideSection>
         </Suspense>
     </div>
 }

@@ -9,11 +9,10 @@ type AsideSectionProps = {
 
 export default function AsideSection(props: AsideSectionProps) {
     const searchParams= useSearchParams() as URLSearchParams
-    const isPreview = searchParams.get("preview") === "true"
-    const slug = searchParams.get("slug")
+    const preview_slug = searchParams.get("preview")
 
-    return <aside  className="w-full hidden lg:grid border-l max-w-3/5">
-        {(isPreview && slug) && <PreviewProduct slug={slug}/>}
+    return <aside  className="w-full hidden lg:grid border-l max-w-3/5 relative">
+        {(preview_slug) && <PreviewProduct slug={preview_slug}/>}
         {props.children}
     </aside>
 }
