@@ -8,13 +8,14 @@ from selenium import webdriver
 
 ITEMS_TO_SCRAPE = 150
 ITEMS = {
-    "men": [
-        "t-shirt", "shirts", "jeans", "trousers", "shorts", "jackets", "sweatshirts",
-        "suits", "blazers", "innerwear", "track pants", "hoodies", "ethnic wear",
-        "kurta", "vests", "socks", "sweaters", "coats", "cargos", "swimwear", "nightwear"
-    ],
+    # "men": [
+    #     "t-shirt","shirts", "jeans", "trousers", "shorts", "jackets", "sweatshirts",
+    #     "suits", "blazers", "innerwear", "track pants", "hoodies", "ethnic wear",
+    #     "kurta", "vests", "socks", "sweaters", "coats", "cargos", "swimwear", "nightwear"
+    # ],
     "women": [
-        "t-shirt", "tops", "dresses", "jeans", "trousers", "shorts", "skirts", "jackets",
+        # "t-shirt", "tops",
+        "dresses", "jeans", "trousers", "shorts", "skirts", "jackets",
         "sweatshirts", "suits", "blazers", "innerwear", "leggings", "kurti", "ethnic wear",
         "saree", "sweaters", "swimwear", "nightwear", "shrugs", "jumpsuits", "track pants",
         "cardigans", "tunics", "gowns", "palazzos"
@@ -33,7 +34,9 @@ ACCEPTABLE_KEYS = set({
     'Fit'
 })
 def get_search_url(gender, query, page_number):
-    return f"https://www.myntra.com/{gender}-clothing?rawQuery={query}&p={page_number}"
+    template = f"https://www.myntra.com/{gender}-clothing?rawQuery={query}&p={page_number}&f=Gender%3A{gender}%2C{gender}"
+    return template
+
 
 def extract_image_url(style):
     match = re.search(r'url\(["\']?(.*?)["\']?\)', style)
@@ -94,13 +97,14 @@ def save_to_json(data, file_name):
 
 driver = webdriver.Chrome()
 
-scraped_items = 0
 for gender, categories in ITEMS.items():
     for item_type in categories:
+        scraped_items = 0
         if scraped_items >= ITEMS_TO_SCRAPE:
             break
-        for page in range(1, 20):
+        for page in range(1, 3):
             if scraped_items >= ITEMS_TO_SCRAPE:
+                print("Scraped enough items. Exiting...")
                 break
             search_url = get_search_url(gender, item_type, page)
             driver.get(search_url)
