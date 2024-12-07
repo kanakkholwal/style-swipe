@@ -2,7 +2,13 @@ import { getProductBySlug } from "@/db/actions/product"
 import Image from "next/image"
 import { notFound } from "next/navigation"
 
-export default async function ProductPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+    params:Promise<{
+        slug:string
+    }>
+}
+
+export default async function ProductPage({ params }: PageProps) {
     const product = await getProductBySlug(params.slug)
 
     if (!product) {
