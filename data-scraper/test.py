@@ -12,5 +12,5 @@ ITEMS = {
     ]
 }
 
-for key, value,array in ITEMS.items():
-    print(key, value,array)
+for key, value in ITEMS.items():
+    print(key, value)
