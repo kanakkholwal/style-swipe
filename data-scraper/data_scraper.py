@@ -15,7 +15,8 @@ ITEMS = {
     # ],
     "women": [
         # "t-shirt", "tops",
-        "dresses", "jeans", "trousers", "shorts", "skirts", "jackets",
+        # "dresses", "jeans", "trousers", "shorts", 
+        "skirts", "jackets",
         "sweatshirts", "suits", "blazers", "innerwear", "leggings", "kurti", "ethnic wear",
         "saree", "sweaters", "swimwear", "nightwear", "shrugs", "jumpsuits", "track pants",
         "cardigans", "tunics", "gowns", "palazzos"

@@ -7,19 +7,19 @@ export const FOOTER_LINKS = [
         links: [
             {
                 title: "Dev Tools",
-                href: "nexonauts.com/dev-tools",
+                href: "https://nexonauts.com/dev-tools",
             },
             {
                 title: "Dev Profiles",
-                href: "nexonauts.com/devs",
+                href: "https://nexonauts.com/devs",
             },
             {
                 title: "Nexo Scout",
-                href: "nexonauts.com/scout",
+                href: "https://nexonauts.com/scout",
             },
             {
                 title: "MarketPlace",
-                href: "nexonauts.com/marketplace",
+                href: "https://nexonauts.com/marketplace",
             },
         ],
     },

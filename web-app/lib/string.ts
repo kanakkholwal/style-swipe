@@ -2,7 +2,7 @@ import { customAlphabet } from "nanoid";
 
 
 export function sanitize(str:string){
-    return str.replace("_"," ").replace("  "," ").trim()
+    return str.replaceAll("_"," ").replaceAll("-"," ").replaceAll("  "," ").trim()
 }
 
 export function slugify(text: string): string {

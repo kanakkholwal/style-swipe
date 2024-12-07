@@ -69,7 +69,7 @@ const data = {
     },
     {
       name: "Search for outfits",
-      url: "/app/search",
+      url: "/app/explore",
       icon: Map,
     },
   ],
