@@ -8,8 +8,9 @@ interface PageProps {
     }>
 }
 
-export default async function ProductPage({ params }: PageProps) {
-    const product = await getProductBySlug(params.slug)
+export default async function ProductPage(props: PageProps) {
+    const {slug} = await props.params
+    const product = await getProductBySlug(slug)
 
     if (!product) {
         return notFound()

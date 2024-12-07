@@ -36,6 +36,7 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
         console.log(direction + ' of : ', product);
         console.log(data)
         setQueue((prev) => [...prev, data])
+        console.log(queue)
     };
 
 
@@ -57,7 +58,7 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
 
     };
     const handle_success_swipe = (direction: string, product: ProductType) => {
-
+        console.log(direction,product)
     }
     const handle_failed_swipe = () => {
 
