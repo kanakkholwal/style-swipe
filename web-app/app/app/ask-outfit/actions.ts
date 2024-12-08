@@ -2,7 +2,7 @@
 
 import { db } from "@/db/connect";
 import { products } from "@/db/schema";
-import { sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 
 export async function getAllOccasions() {
     try {
@@ -13,9 +13,10 @@ export async function getAllOccasions() {
         );
 
         // Extract the results into an array
-        const uniqueOccasions = uniqueOccasionsQuery.rows.map((row: any) => row.occasion);
+        // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                const uniqueOccasions = uniqueOccasionsQuery.rows.map((row: any) => row.occasion);
 
-        return Promise.resolve(uniqueOccasions)
+        return Promise.resolve(uniqueOccasions as string[])
     } catch (error) {
         console.error("Error fetching unique occasions from specifications:", error);
         throw new Error("Failed to fetch unique occasions.");
@@ -28,18 +29,23 @@ export async function getOutfitSuggestions(occasion: string, gender: string) {
         const queryResults = await db
             .select()
             .from(products)
-            .where(products.gender.eq(gender).and(products.wearType.eq(occasion)));
+            .where(
+                and(
+                    eq(products.gender, gender),
+                    eq(products.wearType, occasion)
+                )
+            );
 
         // Group products by wear_type
-        const groupedProducts: Record<string, any[]> = {};
+        const groupedProducts: Record<string, typeof queryResults> = {};
 
-        queryResults.forEach((product) => {
+        for (const product of queryResults) {
             const { wearType } = product;
             if (!groupedProducts[wearType]) {
                 groupedProducts[wearType] = [];
             }
             groupedProducts[wearType].push(product);
-        });
+        }
 
         return groupedProducts;
     } catch (error) {

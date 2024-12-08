@@ -1,9 +1,9 @@
 
-import {getAllOccasions} from "./actions"
+import { getAllOccasions } from "./actions"
 import FormBox from "./form"
 
-export default function AskForOutFitPage() {
-    const occasions = getAllOccasions()
+export default async function AskForOutFitPage() {
+    const occasions = await getAllOccasions()
 
 
     return (<div className="pt-6 @container">
@@ -15,8 +15,7 @@ export default function AskForOutFitPage() {
             Get your wardrobe ready for every occasion with our suggestions!
         </p>
         <div className="flex gap-8 flex-col w-full justify-center items-center">
-
-           <FormBox occasions={occasions}/>
+            <FormBox occasions={occasions} />
         </div>
     </div>)
 }

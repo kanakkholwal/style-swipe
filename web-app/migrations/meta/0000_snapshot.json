@@ -1,5 +1,5 @@
 {
-  "id": "ead9a0f8-c762-473d-9bc2-d932712bcfb0",
+  "id": "0493be4c-ed05-4b0f-b1b3-20b13aa2eba5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -115,7 +115,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
@@ -145,9 +145,10 @@
         },
         "image_urls": {
           "name": "image_urls",
-          "type": "jsonb",
+          "type": "text[]",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "ARRAY[]::text[]"
         },
         "title": {
           "name": "title",
@@ -177,7 +178,8 @@
           "name": "specifications",
           "type": "jsonb",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "'{}'::jsonb"
         }
       },
       "indexes": {},
