@@ -1,14 +1,5 @@
 "use client"
 
-import {
-  Frame,
-  GalleryVerticalEnd,
-  Map as MapIcon,
-  PieChart,
-  Settings2
-} from "lucide-react"
-import type{ComponentProps} from "react"
-import { useSession } from "@/lib/auth-client"
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
@@ -22,15 +13,18 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { useSession } from "@/lib/auth-client"
+import {
+  Frame,
+  GalleryVerticalEnd,
+  Map as MapIcon,
+  PieChart,
+  Settings2
+} from "lucide-react"
 import Link from "next/link"
+import type { ComponentProps } from "react"
 // This is sample data.
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-
   navMain: [
     {
       title: "Settings",
@@ -112,7 +106,7 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
         {session && <NavUser user={{
           name: session.user.name,
           email: session.user.email,
-          image: session.user.image,
+          image: session.user.image ?? ""
         }} />}
       </SidebarFooter>
       <SidebarRail />

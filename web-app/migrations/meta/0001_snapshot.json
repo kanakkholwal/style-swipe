@@ -1,6 +1,6 @@
 {
-  "id": "437f67cf-9221-4c4e-b2d9-3f0f413f2696",
-  "prevId": "a12cb353-90f9-4c5e-ad69-344f678b4b76",
+  "id": "28570eac-d465-44e3-afc8-cfa4b13992bc",
+  "prevId": "ead9a0f8-c762-473d-9bc2-d932712bcfb0",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -115,20 +115,9 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "products_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
+          "notNull": true
         },
         "product_url": {
           "name": "product_url",
@@ -174,13 +163,13 @@
         },
         "price": {
           "name": "price",
-          "type": "integer",
+          "type": "numeric(10, 2)",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "mrp": {
           "name": "mrp",
-          "type": "integer",
+          "type": "numeric(10, 2)",
           "primaryKey": false,
           "notNull": false
         },
