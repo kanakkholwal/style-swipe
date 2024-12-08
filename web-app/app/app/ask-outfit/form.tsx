@@ -81,9 +81,9 @@ export default function FormBox({ occasions }: FormBoxProps) {
                 {Object.entries(suggestions).map(([key, value]) => {
                     return <div key={key} className="flex flex-col gap-4 w-full z-10">
                         <h2 className="text-xl font-bold">{key}</h2>
-                        <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                        <div className="flex gap-4 flex-wrap items-stretch justify-start">
                             {value.map((item) => {
-                                return <SuggestedItem {...item} key={item.description} />
+                                return <SuggestedItem {...item} key={item.id} />
                             })}
                         </div>
                     </div>
@@ -96,9 +96,9 @@ type suggestedItem = suggestionType[keyof suggestionType][number]
 
 function SuggestedItem(props: suggestedItem) {
 
-    return <Card className='p-2'>
+    return <Card className='p-2 max-w-96'>
         <CardHeader>
-            <Image src={props.imageUrls[0]} alt={props.description} width={360} height={480} className='rounded-md h-auto max-h-60 mx-auto' />
+            <Image src={props.imageUrls[0]} alt={props.description} width={360} height={480} className='rounded-md h-auto mx-auto' />
         </CardHeader>
         <CardContent>
             <CardTitle>{props.description}</CardTitle>

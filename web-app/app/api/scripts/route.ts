@@ -25,6 +25,10 @@ export async function GET(request: NextRequest) {
         //     mrp: product.mrp,
         //     specifications: product.specifications,
         // }));
+        // await db.delete(products).where({
+            
+        // });
+        
         // await db.insert(products).values(formattedProducts);
         console.log('Products inserted successfully!');
 

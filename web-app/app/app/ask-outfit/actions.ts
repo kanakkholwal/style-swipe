@@ -14,7 +14,7 @@ export async function getAllOccasions() {
 
         // Extract the results into an array
         // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-                const uniqueOccasions = uniqueOccasionsQuery.rows.map((row: any) => row.occasion);
+        const uniqueOccasions = uniqueOccasionsQuery.rows.map((row: any) => row.occasion);
 
         return Promise.resolve(uniqueOccasions as string[])
     } catch (error) {
@@ -32,19 +32,23 @@ export async function getOutfitSuggestions(occasion: string, gender: string) {
             .where(
                 and(
                     eq(products.gender, gender),
-                    eq(products.wearType, occasion)
+                    // eq(products.wearType, occasion)
                 )
-            );
+            )
+            .limit(10)
+            // .groupBy(products.wearType)
 
         // Group products by wear_type
         const groupedProducts: Record<string, typeof queryResults> = {};
 
         for (const product of queryResults) {
             const { wearType } = product;
-            if (!groupedProducts[wearType]) {
-                groupedProducts[wearType] = [];
+            if (["upper_body","lower_body","footwear"].includes(wearType)) {
+                if(!groupedProducts[wearType]) {
+                    groupedProducts[wearType] = [];
+                }
+                groupedProducts[wearType].push(product);
             }
-            groupedProducts[wearType].push(product);
         }
 
         return groupedProducts;
