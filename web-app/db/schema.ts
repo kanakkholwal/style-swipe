@@ -1,4 +1,10 @@
+export { products } from './schema/product';
 
-export const schema = {
+export {
+    users,
+    sessions,
+    accounts,
+    verifications
     
-}
+} from './schema/auth-schema';
+

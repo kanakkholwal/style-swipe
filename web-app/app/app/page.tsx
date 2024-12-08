@@ -31,9 +31,9 @@ export default function Page() {
         <p className="text-gray-600 mb-8">
             Explore the latest trends and styles, curated just for you.
         </p>
-        <div className="grid gap-8 @xl:grid-cols-4 @3xl:grid-cols-5">
-            {routes.map((route, idx) => (
-                <RouteCard key={idx} route={route} />
+        <div className="grid gap-8 @lg:grid-cols-3 @xl:grid-cols-4 @3xl:grid-cols-5">
+            {routes.map((route) => (
+                <RouteCard key={route.path} route={route} />
             ))}
         </div>
     </div>

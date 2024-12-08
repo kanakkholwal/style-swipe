@@ -3,12 +3,12 @@
 import {
   Frame,
   GalleryVerticalEnd,
-  Map,
+  Map as MapIcon,
   PieChart,
   Settings2
 } from "lucide-react"
-import * as React from "react"
-
+import type{ComponentProps} from "react"
+import { useSession } from "@/lib/auth-client"
 import { NavMain } from "@/components/nav-main"
 import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
@@ -70,12 +70,15 @@ const data = {
     {
       name: "Search for outfits",
       url: "/app/explore",
-      icon: Map,
+      icon: MapIcon,
     },
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
+  const {
+    data: session
+} = useSession()
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -102,11 +105,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavProjects projects={data["routes"]} />
+        <NavProjects projects={data.routes} />
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {session && <NavUser user={{
+          name: session.user.name,
+          email: session.user.email,
+          image: session.user.image,
+        }} />}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

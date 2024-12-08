@@ -5,20 +5,19 @@ import {
 	Card,
 	CardContent,
 	CardDescription,
-	CardFooter,
 	CardHeader,
-	CardTitle,
+	CardTitle
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import Image from "next/image";
-import { Loader2, X } from "lucide-react";
 import { signUp } from "@/lib/auth-client";
-import { toast } from "sonner";
+import { Loader2, X } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { toast } from "sonner";
 
-export function SignUp() {
+export default function SignUp() {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
@@ -155,7 +154,7 @@ export function SignUp() {
 								password,
 								name: `${firstName} ${lastName}`,
 								image: image ? await convertImageToBase64(image) : "",
-								callbackURL: "/dashboard",
+								callbackURL: "/app",
 								fetchOptions: {
 									onResponse: () => {
 										setLoading(false);
@@ -167,7 +166,7 @@ export function SignUp() {
 										toast.error(ctx.error.message);
 									},
 									onSuccess: async () => {
-										router.push("/dashboard");
+										router.push("/app");
 									},
 								},
 							});
@@ -181,13 +180,6 @@ export function SignUp() {
 					</Button>
 				</div>
 			</CardContent>
-			<CardFooter>
-				<div className="flex justify-center w-full border-t py-4">
-					<p className="text-center text-xs text-neutral-500">
-						Secured by <span className="text-orange-400">better-auth.</span>
-					</p>
-				</div>
-			</CardFooter>
 		</Card>
 	);
 }

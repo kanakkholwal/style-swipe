@@ -1,21 +1,50 @@
+import { db } from "@/db/connect"; // your drizzle instance
+import {
+    accounts,
+    sessions,
+    users,
+    verifications
+} from "@/db/schema";
 import {
     betterAuth
 } from 'better-auth';
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { nextCookies } from "better-auth/next-js";
 
 export const auth = betterAuth({
+    database: drizzleAdapter(db, {
+        provider: "pg",
+        schema: {
+            users,
+            sessions,
+            accounts,
+            verifications
+        },
+        //if all of them are just using plural form, you can just pass the option below
+        usePlural: true
+    }),
+    session: {
+        cookieCache: {
+            enabled: true,
+            maxAge: 5 * 60 // Cache duration in seconds
+        }
+    },
     emailAndPassword: {
         enabled: true,
-        async sendResetPassword(data, request) {
-            // Send an email to the user with a link to reset their password
-        },
+        // async sendResetPassword(data, request) {
+        // Send an email to the user with a link to reset their password
+        // },
     },
     socialProviders: {
         google: {
-            clientId: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET
         }
     },
 
-    /** if no database is provided, the user data will be stored in memory.
-     * Make sure to provide a database to persist user data **/
+  plugins: [nextCookies()] 
+
 });
+
+
+export type Session = typeof auth.$Infer.Session
