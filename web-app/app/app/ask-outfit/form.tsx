@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Sparkles } from "lucide-react";
 import Image from 'next/image';
 import { useState } from "react";
+import { toast } from "sonner";
 import { getOutfitSuggestions } from "./actions";
 
 interface FormBoxProps {
@@ -24,14 +25,27 @@ export default function FormBox({ occasions }: FormBoxProps) {
     const [occasion, setOccasion] = useState<typeof occasions[number]>("")
     const [gender, setGender] = useState<string>("")
 
+
+    const [loading, setLoading] = useState<boolean>(false)
     const [suggestions, setSuggestions] = useState<suggestionType | null>(null);
 
 
     const getSuggestions = async () => {
-        if(!occasion || !prompt || !gender) return
-        const suggestions = await getOutfitSuggestions(occasion, gender)
-        console.log(suggestions)
-        setSuggestions(suggestions)
+        if (!occasion || !prompt || !gender) {
+            toast.error("Please fill all the fields")
+            return
+        }
+        try {
+            setLoading(true)
+            const suggestions = await getOutfitSuggestions(occasion, gender)
+            console.log(suggestions)
+            setSuggestions(suggestions)
+        }
+        catch (e) {
+            toast.error("Failed to fetch suggestions")
+        } finally {
+            setLoading(false)
+        }
     }
 
     return <>
@@ -68,28 +82,35 @@ export default function FormBox({ occasions }: FormBoxProps) {
                 </Select>
 
             </div>
-            <Button className="mx-auto shadow-primary shadow-md hover:shadow-lg z-10" 
-            onClick={getSuggestions}
-            
-            rounded="full" width="md">
-                Give Suggestions <Sparkles />
+            <Button className="mx-auto shadow-primary shadow-md hover:shadow-lg z-10"
+                onClick={getSuggestions}
+                disabled={loading}
+                rounded="full" width="md">
+                {loading ? "Loading" : "Get Suggestions"}
+                <Sparkles className={loading ? "animate-spin " : ""} />
+
             </Button>
         </div>
 
         <div className="p-4 max-w-[1440px]" id="suggestions_results">
-            {suggestions && <>
-                {Object.entries(suggestions).map(([key, value]) => {
-                    return <div key={key} className="flex flex-col gap-4 w-full z-10">
-                        <h2 className="text-xl font-bold">{key}</h2>
-                        <div className="flex gap-4 flex-wrap items-stretch justify-start">
-                            {value.map((item) => {
-                                return <SuggestedItem {...item} key={item.id} />
-                            })}
+            {loading ? <div className="flex justify-center items-center h-96">
+                <Sparkles className="animate-spin text-cyan-600 size-20" />
+            </div> : suggestions && <>
+                    {Object.entries(suggestions)
+                    .map(([key, value]) => {
+                        return <div key={key} className="flex flex-col gap-4 w-full z-10">
+                            <h2 className="text-xl font-bold capitalize">{key.replace("_"," ")}</h2>
+                            <div className="flex gap-4 flex-wrap items-stretch justify-start">
+                                {value.map((item) => {
+                                    return <SuggestedItem {...item} key={item.id} />
+                                })}
+                            </div>
                         </div>
-                    </div>
-                })}
-            </>}
-        </div></>
+                    })}
+                </>
+            }
+        </div>
+    </>
 }
 
 type suggestedItem = suggestionType[keyof suggestionType][number]

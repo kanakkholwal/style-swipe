@@ -1,9 +1,9 @@
+import { Toaster as ShadToaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
-import "./globals.css";
-import { Toaster as ShadToaster } from "@/components/ui/toaster"
-
 import { Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from 'react-hot-toast';
+import ClientProvider from "./client-provider";
+import "./globals.css";
 
 const font = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
@@ -29,7 +29,9 @@ export default function RootLayout({
       <body
         className={`${font.className} antialiased`}
       >
+        <ClientProvider>
         {children}
+        </ClientProvider>
         <ShadToaster />
         <Toaster />
       </body>

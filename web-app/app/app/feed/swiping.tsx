@@ -1,6 +1,6 @@
 "use client";
+import type { ProductType } from "@/db/schema/product";
 import { slugify } from '@/lib/string';
-import { ProductType } from "@/types/product";
 import { useState } from 'react';
 import TinderCard from 'react-tinder-card';
 import ProductCard from "./product-card";
@@ -22,7 +22,7 @@ function dislikeProduct(product: ProductType) {
     console.log("Added to cart: ", product);
 }
 
-export default function SwipeSection({ data }: { data: ProductType[] }) {
+export default function SwipeSection({ products }: { products: ProductType[] }) {
     const [queue, setQueue] = useState<feedQueueType[]>([])
 
 
@@ -32,8 +32,8 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
             action: direction === "left" ? "disliked" : "liked",
             product_id: slugify(product.description)
         }
-        console.log("----" + direction + "----")
-        console.log(direction + ' of : ', product);
+        console.log(`----${direction}----`)
+        console.log(`${direction} of : `, product);
         console.log(data)
         setQueue((prev) => [...prev, data])
         console.log(queue)
@@ -68,7 +68,7 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
     
 
         <div className="w-full max-w-xl relative overflow-hidden max-h-screen h-full flex justify-center items-center">
-            {data.map((product, index) => {
+            {products.map((product) => {
                 return (
                     <TinderCard
                         className='absolute select-none'
@@ -80,7 +80,7 @@ export default function SwipeSection({ data }: { data: ProductType[] }) {
                         onCardLeftScreen={(direction) => outOfFrame(direction,product)}
                         onSwipeRequirementFulfilled={(dir) => handle_success_swipe(dir, product)}
                         onSwipeRequirementUnfulfilled={handle_failed_swipe}
-                        key={index}
+                        key={product.id}
                     >
                         <ProductCard product={product} />
                     </TinderCard>

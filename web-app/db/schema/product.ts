@@ -20,3 +20,6 @@ export const products = pgTable("products", {
     //     dimensions: 512,
     // }).notNull(),
 });
+
+
+export type ProductType =  typeof products.$inferSelect;

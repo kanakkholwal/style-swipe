@@ -1,12 +1,13 @@
 
 
-import { Input } from "@/components/ui/input"
-import { Search } from "lucide-react"
+import { Input } from "@/components/ui/input";
+import { Link, Search } from "lucide-react";
+import { getProducts } from "./action";
 
 
-
-
-export default function Page() {
+export default async function Page() {
+    const products = await getProducts();
+    // console.log(products);
 
     return <div className="pt-6 @container">
         <section className="flex justify-between items-center flex-col w-full p-5">
@@ -21,6 +22,22 @@ export default function Page() {
                 <Search className="w-6 h-6 text-gray-500 absolute top-1/2 left-auto right-5 -translate-y-[50%]" role="button" type="submit" />
             </form>
         </section>
+
+        <main className="z-10 w-full mx-auto flex gap-5 flex-wrap items-stretch justify-evenly">
+            {products.map((product) => {
+                return <Link href={`/product/${product.id}`}
+                    className="flex flex-col items-center bg-slate-100 hover:shadow-md transition-colors duration-500 p-3 rounded-lg"
+                    key={product.id}>
+                    <img src={product.imageUrls[0]} alt={product.title} className="w-72 h-72 object-cover rounded-lg" />
+                    <h3 className="text-xl font-bold mt-3">{product.title}</h3>
+                    <p className="text-gray-600 mt-1 truncate">{product.description}</p>
+                    <div className="flex items-center mt-2">
+                        <span className="text-lg font-bold">₹{product.price}</span>
+                        {(Number(product.mrp) > 0) ? (<span className="text-red-600 line-through ml-2">₹{product.mrp}</span>):null}
+                    </div>
+                </Link>
+            })}
+        </main>
 
     </div>
 }

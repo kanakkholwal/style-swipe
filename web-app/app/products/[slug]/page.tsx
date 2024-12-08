@@ -1,6 +1,6 @@
-import { getProductBySlug } from "@/db/actions/product"
-import Image from "next/image"
+import ProductTemplate from "@/components/product-template"
 import { notFound } from "next/navigation"
+import { getProductBySlug } from "./actions"
 
 interface PageProps {
     params:Promise<{
@@ -17,9 +17,6 @@ export default async function ProductPage(props: PageProps) {
     }
 
     return <div>
-        <h1 className="text-lg font-bold tracking-wider">
-            {product.description}
-        </h1>
-        <Image src={product.image_url} width={720} height={500} alt={product.description} />
+        <ProductTemplate product={product} />
     </div>
 }

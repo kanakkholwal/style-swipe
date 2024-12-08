@@ -30,6 +30,7 @@
     "lucide-react": "^0.454.0",
     "nexo-deck-swiper": "^0.0.3",
     "next": "^15.0.3",
+    "next13-progressbar": "^1.2.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
