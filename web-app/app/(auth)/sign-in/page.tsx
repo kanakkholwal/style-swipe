@@ -10,12 +10,29 @@ import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "sonner";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const handleSubmit = async () => {
+    try{
+    setLoading(true);
+    await signIn.email({ email, password });
+    }catch(e){
+      if(e instanceof Error){
+        console.error(e.message);
+        toast.error(e.message);
+      }else{
+        console.error(e);
+        toast.error("An error occurred. Please try again later.");
+      }
+    }finally{
+      setLoading(false);
+    }
+  }
 
   return (
     <Card className="max-w-md">
@@ -70,9 +87,7 @@ export default function SignIn() {
             type="submit"
             className="w-full"
             disabled={loading}
-            onClick={async () => {
-              await signIn.email({ email, password });
-            }}
+            onClick={handleSubmit}
           >
             {loading ? (
               <Loader2 size={16} className="animate-spin" />
