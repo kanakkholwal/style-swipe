@@ -1,5 +1,6 @@
 import ProductTemplate from "@/components/product-template"
 import { notFound } from "next/navigation"
+import React from "react"
 import { getProductBySlug } from "./actions"
 
 interface PageProps {

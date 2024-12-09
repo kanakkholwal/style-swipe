@@ -25,6 +25,7 @@ export async function getAllOccasions() {
 
 export async function getOutfitSuggestions(occasion: string, gender: string) {
     try {
+        console.log("Fetching outfit suggestions for occasion:", occasion);
         // Fetch products based on occasion and gender
         const queryResults = await db
             .select()
