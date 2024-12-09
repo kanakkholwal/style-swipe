@@ -56,7 +56,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         </div>
         <CardFooter>
             <Button className="w-full" asChild>
-                <Link href={`/products/${product.id}`}>
+                <Link href={`/app/products/${product.id}`}>
                     View Details
                 </Link>
             </Button>

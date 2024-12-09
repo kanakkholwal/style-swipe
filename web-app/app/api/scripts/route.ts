@@ -8,7 +8,7 @@ export const runtime ="nodejs"
 
 export async function GET(request: NextRequest) {
     try {
-        console.log('Inserting products... ');
+        console.log('Inserting products... ',request);
         // const file = await fs.readFile(`${process.cwd()}/../data-scraper/demo-db/processed_db.json`, 'utf8');
         // const contents = JSON.parse(file);
         // // biome-ignore lint/suspicious/noExplicitAny: <explanation>
