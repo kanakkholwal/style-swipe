@@ -26,7 +26,7 @@ export default async function Page() {
 
         <main className="z-10 w-full mx-auto grid grid-cols-2 @xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 gap-5 flex-wrap items-stretch justify-evenly mt-10">
             {products.map((product) => {
-                return <Link href={`/product/${product.id}`}
+                return <Link href={`/app/product/${product.id}`}
                     className="flex flex-col items-center bg-slate-20 transition-colors duration-500 p-3 rounded-lg border border-transparent hover:border-cyan-600"
                     key={product.id}>
                     <Image src={product.imageUrls[0]} alt={product.title} className="w-72 h-72 object-cover rounded-lg  hover:shadow-md" width={288} height={288} />
