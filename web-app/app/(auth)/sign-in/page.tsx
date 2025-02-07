@@ -1,7 +1,13 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signIn } from "@/lib/auth-client";
@@ -18,21 +24,21 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    try{
-    setLoading(true);
-    await signIn.email({ email, password });
-    }catch(e){
-      if(e instanceof Error){
+    try {
+      setLoading(true);
+      await signIn.email({ email, password });
+    } catch (e) {
+      if (e instanceof Error) {
         console.error(e.message);
         toast.error(e.message);
-      }else{
+      } else {
         console.error(e);
         toast.error("An error occurred. Please try again later.");
       }
-    }finally{
+    } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <Card className="max-w-md">
@@ -61,10 +67,7 @@ export default function SignIn() {
           <div className="grid gap-2">
             <div className="flex items-center">
               <Label htmlFor="password">Password</Label>
-              <Link
-                href="#"
-                className="ml-auto inline-block text-sm underline"
-              >
+              <Link href="#" className="ml-auto inline-block text-sm underline">
                 Forgot your password?
               </Link>
             </div>
@@ -79,48 +82,37 @@ export default function SignIn() {
             />
           </div>
 
-
-
-
-
           <Button
             type="submit"
             className="w-full"
             disabled={loading}
             onClick={handleSubmit}
           >
-            {loading ? (
-              <Loader2 size={16} className="animate-spin" />
-            ) : (
-              "Login"
-            )}
+            {loading ? <Loader2 size={16} className="animate-spin" /> : "Login"}
           </Button>
 
-
-
-          <div className={cn(
-            "w-full gap-2 flex items-center",
-            "justify-between flex-col"
-          )}>
+          <div
+            className={cn(
+              "w-full gap-2 flex items-center",
+              "justify-between flex-col",
+            )}
+          >
             <Button
               variant="outline"
-              className={cn(
-                "w-full gap-2"
-              )}
+              className={cn("w-full gap-2")}
               onClick={async () => {
                 await signIn.social({
                   provider: "google",
-                  callbackURL: "/app"
+                  callbackURL: "/app",
                 });
               }}
             >
-              <FcGoogle/>
+              <FcGoogle />
               Sign in with Google
             </Button>
           </div>
         </div>
       </CardContent>
-
     </Card>
   );
 }

@@ -1,7 +1,7 @@
 import { Toaster as ShadToaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 import ClientProvider from "./client-provider";
 import "./globals.css";
 
@@ -26,12 +26,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${font.className} antialiased`}
-      >
-        <ClientProvider>
-        {children}
-        </ClientProvider>
+      <body className={`${font.className} antialiased`}>
+        <ClientProvider>{children}</ClientProvider>
         <ShadToaster />
         <Toaster />
       </body>

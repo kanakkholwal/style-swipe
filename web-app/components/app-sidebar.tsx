@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
-import { NavUser } from "@/components/nav-user"
+import { NavMain } from "@/components/nav-main";
+import { NavProjects } from "@/components/nav-projects";
+import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -12,17 +12,17 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { useSession } from "@/lib/auth-client"
+} from "@/components/ui/sidebar";
+import { useSession } from "@/lib/auth-client";
 import {
   Frame,
   GalleryVerticalEnd,
   Map as MapIcon,
   PieChart,
-  Settings2
-} from "lucide-react"
-import Link from "next/link"
-import type { ComponentProps } from "react"
+  Settings2,
+} from "lucide-react";
+import Link from "next/link";
+import type { ComponentProps } from "react";
 // This is sample data.
 const data = {
   navMain: [
@@ -67,12 +67,10 @@ const data = {
       icon: MapIcon,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
-  const {
-    data: session
-} = useSession()
+  const { data: session } = useSession();
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -103,13 +101,17 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        {session && <NavUser user={{
-          name: session.user.name,
-          email: session.user.email,
-          image: session.user.image ?? ""
-        }} />}
+        {session && (
+          <NavUser
+            user={{
+              name: session.user.name,
+              email: session.user.email,
+              image: session.user.image ?? "",
+            }}
+          />
+        )}
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

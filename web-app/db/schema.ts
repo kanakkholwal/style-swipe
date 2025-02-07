@@ -1,10 +1,3 @@
-export { products } from './schema/product';
+export { products } from "./schema/product";
 
-export {
-    users,
-    sessions,
-    accounts,
-    verifications
-    
-} from './schema/auth-schema';
-
+export { users, sessions, accounts, verifications } from "./schema/auth-schema";

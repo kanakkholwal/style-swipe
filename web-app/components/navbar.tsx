@@ -36,7 +36,6 @@ export default function Navbar() {
             >
               {process.env.NEXT_PUBLIC_APP_NAME}
             </Link>
-          
           </div>
           <div
             id="layer"
@@ -73,9 +72,7 @@ export default function Navbar() {
                 </span>
               </a>
             </div>
-
           </div>
-
         </div>
       </div>
     </nav>

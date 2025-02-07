@@ -1,9 +1,3 @@
-
-
-export default function NotFound(){
-
-    return <>
-    
-    You are lost
-    </>
+export default function NotFound() {
+  return <>You are lost</>;
 }

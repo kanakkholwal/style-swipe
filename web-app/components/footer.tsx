@@ -17,7 +17,7 @@ export default function Footer() {
               {process.env.NEXT_PUBLIC_APP_NAME}
             </Link>
             <p className="mb-12 xl:w-4/5">
-            Swipe through stylish outfits tailored just for you!
+              Swipe through stylish outfits tailored just for you!
             </p>
             <div className="flex items-center gap-5">
               <Link
@@ -38,7 +38,6 @@ export default function Footer() {
               >
                 <FiLinkedin className="w-5 h-5" />
               </Link>
- 
             </div>
           </div>
           <div className="max-w-[571px] w-full">
@@ -67,8 +66,7 @@ export default function Footer() {
             </Link>{" "}
             . All rights reserved.
           </div>
-          <div>
-          </div>
+          <div></div>
         </div>
       </div>
     </footer>

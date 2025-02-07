@@ -1,23 +1,20 @@
-import { AppSidebar } from "@/components/app-sidebar"
-import { PageTitle } from "./title"
+import { AppSidebar } from "@/components/app-sidebar";
+import { PageTitle } from "./title";
 
-import { GradientBalls } from "@/components/gradient"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
+import { GradientBalls } from "@/components/gradient";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { Skeleton } from "@/components/ui/skeleton"
-import {
-  Bookmark,
-  ShoppingCart
-} from 'lucide-react'
-import { Suspense } from "react"
+} from "@/components/ui/sidebar";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Bookmark, ShoppingCart } from "lucide-react";
+import { Suspense } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const items_in_cart = ["sd",""]
+  const items_in_cart = ["sd", ""];
 
   return (
     <SidebarProvider>
@@ -35,25 +32,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Button size="icon" rounded="full">
               <Bookmark />
             </Button>
-            <Button 
-            size={items_in_cart.length > 0 ? "default" : "icon"}
-            rounded="full" 
-            variant="default_light"
+            <Button
+              size={items_in_cart.length > 0 ? "default" : "icon"}
+              rounded="full"
+              variant="default_light"
             >
               <ShoppingCart />
               {items_in_cart.length > 0 && (
-                <>
-                Checkout
-                  ( {items_in_cart.length} )
-                </>
+                <>Checkout ( {items_in_cart.length} )</>
               )}
             </Button>
           </div>
         </header>
-        <main className="p-4 pt-0 h-full">
-          {children}
-        </main>
+        <main className="p-4 pt-0 h-full">{children}</main>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }

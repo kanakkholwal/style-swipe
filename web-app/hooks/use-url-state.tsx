@@ -10,7 +10,7 @@ const INVALID_VALUES = [undefined, null, "", "null", "undefined"];
 export function useUrlState<T>(
   key: string,
   defaultValue: T,
-  callback?: Callback<T>
+  callback?: Callback<T>,
 ) {
   const router = useRouter();
   const searchParams = useSearchParams() as URLSearchParams;
@@ -38,7 +38,7 @@ export function useUrlState<T>(
       }
       router.push(`?${params.toString()}`);
     },
-    [key, router, searchParams]
+    [key, router, searchParams],
   );
 
   const setUrlState = useCallback(
@@ -53,7 +53,7 @@ export function useUrlState<T>(
         }
       }
     },
-    [callback, updateUrl, defaultValue]
+    [callback, updateUrl, defaultValue],
   );
 
   const resetUrlState = useCallback(() => {

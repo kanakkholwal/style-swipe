@@ -1,9 +1,6 @@
-"use client"
+"use client";
 
-import {
-  MoreHorizontal,
-  type LucideIcon
-} from "lucide-react"
+import { MoreHorizontal, type LucideIcon } from "lucide-react";
 
 import {
   SidebarGroup,
@@ -12,16 +9,16 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   // useSidebar
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 export function NavProjects({
   projects,
 }: {
   projects: {
-    name: string
-    url: string
-    icon: LucideIcon
-  }[]
+    name: string;
+    url: string;
+    icon: LucideIcon;
+  }[];
 }) {
   // const { isMobile } = useSidebar()
   // console.log(isMobile)
@@ -48,5 +45,5 @@ export function NavProjects({
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarGroup>
-  )
+  );
 }

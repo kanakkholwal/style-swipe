@@ -96,7 +96,7 @@ const buttonVariants = cva(
       size: "default",
       transition: "none",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -119,7 +119,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       svgTransition,
       ...props
     },
-    ref
+    ref,
   ) => {
     const Comp = asChild ? Slot : "button";
     return (
@@ -133,13 +133,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             rounded,
             width,
             svgTransition,
-          })
+          }),
         )}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 Button.displayName = "Button";
 

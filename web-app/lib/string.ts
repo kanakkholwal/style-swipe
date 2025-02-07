@@ -1,8 +1,11 @@
 import { customAlphabet } from "nanoid";
 
-
-export function sanitize(str:string){
-    return str.replaceAll("_"," ").replaceAll("-"," ").replaceAll("  "," ").trim()
+export function sanitize(str: string) {
+  return str
+    .replaceAll("_", " ")
+    .replaceAll("-", " ")
+    .replaceAll("  ", " ")
+    .trim();
 }
 
 export function slugify(text: string): string {
@@ -26,6 +29,6 @@ export function slugify(text: string): string {
 export function generateSlug(length = 8): string {
   return customAlphabet(
     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-    length
+    length,
   )();
 }

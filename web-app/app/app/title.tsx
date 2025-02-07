@@ -12,13 +12,13 @@ import { usePathname } from "next/navigation";
 //   BreadcrumbSeparator,
 // } from "@/components/ui/breadcrumb"
 export function PageTitle() {
-    const pathname = usePathname();
-    const title = pathname.split("/").pop();
-    return (
-        <h1 className="text-lg font-semibold text-gray-800 dark:text-gray-200 capitalize">
-            {sanitize(title!)}
+  const pathname = usePathname();
+  const title = pathname.split("/").pop();
+  return (
+    <h1 className="text-lg font-semibold text-gray-800 dark:text-gray-200 capitalize">
+      {sanitize(title!)}
 
-            {/* <Breadcrumb>
+      {/* <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem className="hidden md:block">
                   <BreadcrumbLink href="#">
@@ -31,7 +31,6 @@ export function PageTitle() {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb> */}
-        </h1>
-    )
-
+    </h1>
+  );
 }
